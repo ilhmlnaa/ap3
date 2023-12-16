@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/templates/style.css">
+    <title>Motor Sparepart Store</title>
+</head>
+
+<body>
+    <header>
+        <h1>Aplikasi Pembelian Sparepart Motor</h1>
+    </header>
+
+    <div class="container mt-4">
+        <button type="button" class="custom-button all-button" onclick="location.href='/'">Daftar
+            Barang</button>
+        <button type="button" class="custom-button all-button" onclick="location.href='/view'">Keranjang</button>
+        <button type="button" class="custom-button all-button" onclick="location.href='/calculate'">Pembayaran</button>
+    </div>
+    <div class="container mt-7">
+        <br />
+        <br />
+
+    </div>
+
+    <div class="container">
+
+        <form id="keranjang_form" class="form-container">
+            <h2>
+                <center>Detail Pembayaran</center>
+            </h2>
+            <hr style="border: 2px solid black;">
+            <br />
+            {{if .isEmpty}}
+            <center>
+                <p>Belum Menambah Barang</p>
+            </center>
+            {{else}}
+            <center>
+                <p>Total Pembayaran Anda: {{.total}}</p>
+                <p>Scan QR Code:</p>
+                <img src="/qrcode?text={{urlquery .qrText}}" alt="QR Code">
+                <br />
+                <br />
+                <h3>TERIMAKASIH</h3>
+            </center>
+            <br>
+        </form>
+        {{end}}
+    </div>
+    <footer>
+        <p>
+            <font color="white" weight="bold">AP3B &copy; 2023 Kelompok 6</font>
+        </p>
+    </footer>
+</body>
+
+</html>

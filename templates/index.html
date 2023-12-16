@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/templates/style.css">
+    <title>Motor Sparepart Store</title>
+</head>
+
+<body>
+    <header>
+        <h1>Aplikasi Pembelian Sparepart Motor</h1>
+    </header>
+
+    <div class="container mt-4">
+        <button type="button" class="custom-button" onclick="location.href='/'">Daftar
+            Barang</button>
+        <button type="button" class="custom-button" onclick="location.href='/view'">Keranjang</button>
+        <button type="button" class="custom-button" onclick="location.href='/calculate'">Pembayaran</button>
+    </div>
+    <div class="container mt-7">
+        <br />
+        <br />
+    </div>
+
+
+    <div class="container">
+        <form id="barang_form" action="/add" method="post" class="form-container form-container-barang">
+            <h2>
+                <center>Daftar Barang
+            </h2>
+            <hr style="border: 2px solid black;">
+            </center>
+            <div class="row">
+                <div id="success-message" class="container alert alert-success"
+                    style="display: none; margin-top: 10px; text-align: center; background-color: #797a7a; color:#fff; border-radius: 20px; height: 60px; width: 70%;">
+                    Barang sukses ditambahkan!
+                </div>
+                {{range $index, $element := .Spareparts}}
+                <div class="col-md-4 mb-4">
+                    <div class="sparepart-item text-center">
+                        <img src="/assets/{{$element.Name}}.png" alt="{{$element.Name}}" class="img-fluid"
+                            style="width: 50%;">
+                        <!-- <img src="https://m.devnet.my.id/img/{{$element.Name}}.jpg" alt="{{$element.Name}}"
+                            class="img-fluid" style="width: 50%;"> -->
+                        <h5 class="mt-2">{{$element.Name}} {{$element.Price}}k</h5>
+                        <input type="number" name="{{$element.Name}}" id="{{$element.Name}}" class="form-control"
+                            placeholder="Maukkan Jumlah" required>
+                        <button type="button" class="custom-button"
+                            onclick="addToCart('{{$element.Name}}')">Tambahkan</button>
+
+                    </div>
+                </div>
+                {{end}}
+
+            </div>
+
+            <!-- <center>
+                <input type="submit" value="Add All to Cart" class="custom-button">
+            </center> -->
+
+        </form>
+    </div>
+
+
+    </div>
+    <footer>
+        <p>
+            <font color="white" weight="bold">AP3B &copy; 2023 Kelompok 6</font>
+        </p>
+    </footer>
+    <!-- JAVASCRIPT DAN BOOTSTRAP -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function addToCart(part) {
+            var quantity = document.getElementById(part).value;
+            if (quantity > 0) {
+                // Use JavaScript to submit the form with the specific spare part via AJAX
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/add", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                showSuccessMessage();
+                var formData = "part=" + encodeURIComponent(part) + "&quantity=" + encodeURIComponent(quantity);
+                xhr.send(formData);
+            } else {
+                alert("Masukkan jumlah yang sesuai!");
+            }
+        }
+
+        function toggleForm(formId) {
+            const forms = document.getElementsByClassName("form-container");
+
+            // Hide all forms
+            for (let i = 0; i < forms.length; i++) {
+                forms[i].style.display = 'none';
+            }
+
+            // Show the selected form
+            const form = document.getElementById(formId);
+            form.style.display = 'block';
+
+
+        }
+
+        function showSuccessMessage() {
+            $("#success-message").css("display", "block");
+            setTimeout(function () {
+                $("#success-message").css("display", "none");
+            }, 2000);
+        }
+
+    </script>
+
+</body>
+
+</html>

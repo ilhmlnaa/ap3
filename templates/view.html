@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/templates/style.css">
+    <title>Motor Sparepart Store</title>
+</head>
+
+<body>
+    <header>
+        <h1>Aplikasi Pembelian Sparepart Motor</h1>
+    </header>
+
+    <div class="container mt-4">
+        <button type="button" class="custom-button all-button" onclick="location.href='/'">Daftar
+            Barang</button>
+        <button type="button" class="custom-button all-button" onclick="location.href='/view'">Keranjang</button>
+        <button type="button" class="custom-button all-button" onclick="location.href='/calculate'">Pembayaran</button>
+    </div>
+    <div class="container mt-7">
+        <br />
+        <br />
+
+    </div>
+
+
+    <div class="container">
+        <form id="keranjang_form" class="form-container">
+            <h2>
+                <center>Keranjang
+            </h2>
+            <hr style="border: 2px solid black;">
+            </center>
+            <br />
+            {{ if eq (len .cart) 0 }}
+            <center>
+                <p>Keranjang kosong</p>
+            </center>
+            {{ else }}
+            {{ range $key, $value := .cart }}
+            <div class="item-container">
+                <div class="item-details">
+                    <img src="/assets/{{$key}}.png" alt="{{$key}}" class="img-fluid item-image">
+                    <p class="item-name">{{$key}} Jumlah: {{$value}}</p>
+                </div>
+                <button class="custom-button" onclick="removeFromCart('{{$key}}')">Hapus</button>
+            </div>
+            {{ end }}
+            {{ end }}
+        </form>
+    </div>
+    <footer>
+        <p>
+            <font color="white" weight="bold">AP3B &copy; 2023 Kelompok 6</font>
+        </p>
+    </footer>
+    <!-- JAVASCRIPT DAN BOOTSTRAP -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function removeFromCart(part) {
+            // Use JavaScript to send a request to remove one item of the part from the cart
+            fetch('/remove', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    part: part,
+                    quantity: 1,  // Remove one item
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Reload the page after successful removal
+                        location.reload();
+                    } else {
+                        alert('Failed to remove item from cart.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+
+</body>
+
+</html>
