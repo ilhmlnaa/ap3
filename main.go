@@ -11,7 +11,7 @@ import (
 	"github.com/skip2/go-qrcode"
 )
 
-// SparePart struct represents a spare part with its name and price
+// Membuat struct untuk beberapa variable 
 type SparePart struct {
 	Name  string
 	Price float64
@@ -23,6 +23,7 @@ var spareparts = []SparePart{
 	{Name: "Rantai", Price: 80.000},
 	{Name: "Ban", Price: 100.000},
 	{Name: "Oli", Price: 50.000},
+	{Name: "Lampu", Price:25.000},
 }
 
 var cart = make(map[string]int)
