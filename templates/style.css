@@ -19,7 +19,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   position: relative;
-  margin: 0; /* Reset margin to zero */
+  margin: 0; /* Reset margin to zersadasos */
   display: flex;
   flex-direction: column;
 }
