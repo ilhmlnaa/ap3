@@ -1,3 +1,9 @@
+*,
+html {
+  padding: 0;
+  margin: 0;
+}
+
 body {
   background-repeat: no-repeat;
   background-position: center center;
@@ -11,9 +17,11 @@ body {
   overflow: auto;
   align-items: center;
   justify-content: center;
-  min-height: 100%;
+  min-height: 100vh;
   position: relative;
   margin: 0; /* Reset margin to zero */
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -25,6 +33,7 @@ header {
   background: #333536;
   border-top: 2px solid #4e5153;
   border-bottom: 2px solid #4e5153;
+  width: 100%;
 }
 
 header h1 {
@@ -36,16 +45,11 @@ header h1 {
 }
 
 footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  background: #333536;
-  border-top: 2px solid #4e5153;
-  border-bottom: 2px solid #4e5153;
-  margin-top: 2rem;
+  margin-top: auto;
+  background-color: rgba(49, 61, 61, 1) !important;
+  color: white;
+  bottom: 0;
   width: 100%;
-  padding-top: 20px;
 }
 
 h2 {
@@ -86,7 +90,7 @@ h2 {
   max-height: calc(100vh - 325px);
   overflow: auto;
   backdrop-filter: blur(5px);
-  margin-bottom: calc(100vh - 455px);
+  margin-bottom: 2rem;
   font-weight: bold;
 }
 

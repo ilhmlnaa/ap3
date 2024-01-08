@@ -12,11 +12,11 @@
 </head>
 
 <body>
-    <header>
+    <header class="sticky-top">
         <h1>Aplikasi Pembelian Sparepart Motor</h1>
     </header>
 
-    <div class="container mt-4">
+    <div class="container mt-4 mb-2 ">
         <button type="button" class="custom-button" onclick="location.href='/'">Daftar
             Barang</button>
         <button type="button" class="custom-button" onclick="location.href='/view'">Keranjang</button>
@@ -41,7 +41,7 @@
                     Barang sukses ditambahkan!
                 </div>
                 {{range $index, $element := .Spareparts}}
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4">
                     <div class="sparepart-item text-center">
                         <img src="/assets/{{$element.Name}}.png" alt="{{$element.Name}}" class="img-fluid"
                             style="width: 50%;">
@@ -65,14 +65,13 @@
 
         </form>
     </div>
-
-
     </div>
-    <footer>
-        <p>
-            <font color="white" weight="bold">AP3B &copy; 2023 Kelompok 6</font>
-        </p>
+    <footer class="text-center text-lg-start bottom">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+            AP3B &copy; 2023 Kelompok 6
+        </div>
     </footer>
+
     <!-- JAVASCRIPT DAN BOOTSTRAP -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
